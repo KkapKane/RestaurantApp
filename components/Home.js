@@ -1,36 +1,56 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import homeBg from '../assets/thoa-ngo-bHebI7X-cP8-unsplash.jpg';
+import logo from '../assets/icons8-asian-hat-100.png';
 
-export default function Home({ openShop, openDashboard }) {
+export default function Home({ setPage }) {
+
   return (
-    <View style={styles.container}>
+    <ImageBackground source={homeBg} resizeMode='cover' style={styles.container}>
+      {/* Logo */}
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logo} />
+        <Text style={styles.logoText}>Rice Paddy Hat</Text>
+      </View>
 
-      <Text style={styles.logo}>Restaurant Name</Text>
-
+      {/* Navigation */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.guestButton} onPress={openShop}>
-            <Text style={styles.guest}>Login as Guest</Text>
-          </TouchableOpacity>
-        <TouchableOpacity onPress={openDashboard}>
+
+        {/* Takes you to shop */}
+        <TouchableOpacity style={styles.guestButton} onPress={() => setPage('shop')}>
+          <Text style={styles.guest}>Login as Guest</Text>
+        </TouchableOpacity>
+
+        {/* Takes you to admin dashboard */}
+        <TouchableOpacity onPress={() => setPage('dashboard')}>
           <Text style={styles.admin}>Login as Admin</Text>
         </TouchableOpacity>
       </View>
-      
-    </View>
+
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D7D9CE',
+    width: '100%',
+    background: homeBg,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoContainer: {
+    marginBottom: '90%',
+    paddingHorizontal: 10,
+    alignItems: 'center',
+  },
   logo: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: '50%',
+    width: 50,
+    height: 50,
+  },
+  logoText: {
     color: '#040404',
+    fontSize: 35,
+    fontWeight: 'bold',
   },
   buttonContainer: {
     alignItems: 'center',
