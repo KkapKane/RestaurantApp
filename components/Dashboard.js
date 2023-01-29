@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function Dashboard({ openHome }) {
+export default function Dashboard({ setPage }) {
   return (
     <View style={styles.container}>
 
       <Text>Dashboard</Text>
 
-      <TouchableOpacity onPress={openHome}>
+      <TouchableOpacity onPress={() => setPage('home')}>
         <Text>Home</Text>
       </TouchableOpacity>
 
@@ -17,7 +17,7 @@ export default function Dashboard({ openHome }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D7D9CE',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
