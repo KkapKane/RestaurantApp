@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, ActivityIndicator, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, ActivityIndicator, FlatList, Image } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -12,13 +12,13 @@ export default function Shop({ setPage }) {
 
     const [loading, setLoading] = useState(false);
 
-    const [foods, setFoods] = useState([{}]);
+    const [foods, setFoods] = useState([]);
 
     async function fetchFoods() {
         try {
             setLoading(true);
             const response = await axios.get('https://puce-beautiful-beaver.cyclic.app/restaurant/menu/foods');
-            setFoods(response);
+            setFoods(response.data);
         }
 
         catch (error) {
@@ -31,73 +31,81 @@ export default function Shop({ setPage }) {
         fetchFoods();
     }, []);
 
-    useEffect(() => {
-        console.log(foods)
-    }, [foods]);
+
 
     const list = () => {
         return foods.map(food => {
             return (
-                <View>
-                    <Text>{food.name}</Text>
+          
+                <View style={styles.foodCard}>
+                    <Text style={styles.foodName}>{food.name}</Text>
+                  <Image
+                    source={{ uri: `${food.img}` }}
+                    style={{ width: 400, height: 200 }}
+                  />
+                  
+                  <Text style={styles.foodPrice}>${food.price}</Text>
                 </View>
-            )
+        
+            );
         })
     }
 
     return (
-        <View style={styles.container}>
-            {/* header */}
-            <View style={styles.headerContainer}>
-                <Text style={styles.header}>Browse Menu</Text>
-                <EvilIcons name='search' size={30} />
-            </View>
-
-            {/* Menu Content */}
-            <View style={styles.menuContainer}>
-                {!loading ? foods !== undefined ?
-                    /* insert menu maps */
-                    <View>{list()}</View>
-
-                    :
-
-                    <ActivityIndicator size='large' />
-
-                    :
-                    <ActivityIndicator size='large' />
-
-                }
-            </View>
-
-            {/* Bottom NavBar */}
-            <View style={styles.navBar}>
-                <TouchableOpacity style={styles.navBtn} onPress={() => setPage('home')}>
-                    <Ionicons name='home-outline' size={30} />
-                    <Text>Home</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.navBtn}>
-                    <MaterialIcons name='menu-book' size={30} />
-                    <Text>Browse All</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.navBtn}>
-                    <Entypo name='bowl' size={30} />
-                    <Text>Food</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.navBtn}>
-                    <MaterialCommunityIcons name='tea-outline' size={30} />
-                    <Text>Drinks</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.navBtn}>
-                    <FontAwesome name='credit-card' size={30} />
-                    <Text>Payment</Text>
-                </TouchableOpacity>
-
-            </View>
+      <View style={styles.container}>
+        {/* header */}
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>Browse Menu</Text>
+          <EvilIcons name='search' size={30} />
         </View>
+
+        {/* Menu Content */}
+        <View style={styles.menuContainer}>
+          <ScrollView>
+            {!loading ? (
+              foods !== undefined ? (
+                /* insert menu maps */
+                <View>{list()}</View>
+              ) : (
+                <ActivityIndicator size='large' />
+              )
+            ) : (
+              <ActivityIndicator size='large' />
+            )}
+          </ScrollView>
+        </View>
+
+        {/* Bottom NavBar */}
+        <View style={styles.navBar}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => setPage("home")}
+          >
+            <Ionicons name='home-outline' size={30} />
+            <Text>Home</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.navBtn}>
+            <MaterialIcons name='menu-book' size={30} />
+            <Text>Browse All</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.navBtn}>
+            <Entypo name='bowl' size={30} />
+            <Text>Food</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.navBtn}>
+            <MaterialCommunityIcons name='tea-outline' size={30} />
+            <Text>Drinks</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.navBtn}>
+            <FontAwesome name='credit-card' size={30} />
+            <Text>Payment</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
 }
 
@@ -140,5 +148,16 @@ const styles = StyleSheet.create({
     navBtn: {
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    foodCard: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    foodName: {
+        fontSize: 20,
+    },
+    foodPrice: {
+        fontSize: 15,
+        textAlign: 'right'
     }
 });
