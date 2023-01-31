@@ -1,8 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native';
+
 
 export default function Dashboard({ setPage }) {
   return (
     <View style={styles.container}>
+
+      <View>
+      <Button title='test'/>
+      </View>
 
       <Text>Dashboard</Text>
 
