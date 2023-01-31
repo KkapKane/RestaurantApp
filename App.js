@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Home from "./components/Home";
-import Shop from "./components/Shop";
+
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Home from './components/Home';
+import Shop from './components/Shop/Shop';
 import Dashboard from "./components/Dashboard/Dashboard";
+
 
 export default function App() {
   const [page, setPage] = useState("home");
