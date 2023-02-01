@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   recentContainer: {
-    borderColor: "gray",
-    borderWidth: 1,
-    borderStyle: "solid",
     height: 300,
     width: "100%",
   },
