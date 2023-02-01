@@ -6,7 +6,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigate } from "react-router-native";
 
-export default function Shop({ category, setCategory }) {
+export default function NavBar({ category, setCategory }) {
   const navigate = useNavigate();
   function navto(location) {
     navigate(location);
@@ -33,31 +33,29 @@ export default function Shop({ category, setCategory }) {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.navBtn}
-        onPress={() => setCategory("food")}
-      >
-        <Entypo
-          name='bowl'
-          size={30}
-          color={category == "food" ? "#119DA4" : null}
-        />
-        <Text style={category == "food" ? { color: "#119DA4" } : null}>
-          Food
-        </Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.navBtn}
+                onPress={() => setCategory('food')} >
+                <Entypo name='bowl' size={30}
+                    color={category == 'food' || category == 'appetizers' || category == 'entrees' ? '#119DA4' : null} />
+                <Text style={category == 'food' || category == 'appetizers' || category == 'entrees' ? { color: '#119DA4' } : null}>
+                    Food
+                </Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navBtn}>
-        <MaterialCommunityIcons name='tea-outline' size={30} />
-        <Text>Drinks</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.navBtn}
+                onPress={() => setCategory('drinks')}>
+                <MaterialCommunityIcons name='tea-outline' size={30} color={category == 'drinks' ? '#119DA4' : null} />
+                <Text style={category == 'drinks' ? { color: '#119DA4' } : null}>Drinks</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navBtn}>
-        <FontAwesome name='credit-card' size={30} />
-        <Text>Payment</Text>
-      </TouchableOpacity>
-    </View>
-  );
+            <TouchableOpacity style={styles.navBtn}>
+                <MaterialCommunityIcons name='food-takeout-box-outline' size={30} />
+                <Text>Cart (0)</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

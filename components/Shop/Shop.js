@@ -1,17 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  Image,
-} from "react-native";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import NavBar from "./NavBar";
-import Menu from "./Menu";
+import { StyleSheet, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Header from './Header';
+import Menu from './Menu';
+import NavBar from './NavBar';
 
 export default function Shop() {
   const [loading, setLoading] = useState(false);
@@ -45,13 +37,12 @@ export default function Shop() {
     fetchProducts("drinks");
   }, []);
 
+
+
+
   return (
     <View style={styles.container}>
-      {/* header */}
-      <View style={styles.headerContainer}>
-        <Text style={styles.header}>Browse Menu</Text>
-        <EvilIcons name='search' size={30} />
-      </View>
+      <Header page={page} />
 
       <Menu
         loading={loading}
@@ -62,6 +53,7 @@ export default function Shop() {
       />
 
       <NavBar category={category} setCategory={setCategory} />
+
     </View>
   );
 }
@@ -72,32 +64,5 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
-  },
-  headerContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 30,
-  },
-  header: {
-    fontSize: 25,
-    fontWeight: "bold",
-  },
-  menuContainer: {
-    width: "100%",
-    marginBottom: 60,
-  },
-  foodCard: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  foodName: {
-    fontSize: 20,
-  },
-  foodPrice: {
-    fontSize: 15,
-    textAlign: "right",
   },
 });
