@@ -12,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {page == "home" ? <Home setPage={setPage} /> : null}
-      {page == "shop" ? <Shop setPage={setPage} /> : null}
+      {page == "shop" ? <Shop page={page} setPage={setPage} /> : null}
       {page == "dashboard" ? <Dashboard setPage={setPage} /> : null}
     </View>
   );
