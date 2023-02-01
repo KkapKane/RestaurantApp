@@ -1,11 +1,28 @@
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import homeBg from '../assets/thoa-ngo-bHebI7X-cP8-unsplash.jpg';
-import logo from '../assets/icons8-asian-hat-100.png';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import homeBg from "../assets/thoa-ngo-bHebI7X-cP8-unsplash.jpg";
+import logo from "../assets/icons8-asian-hat-100.png";
+import { useNavigate } from "react-router-native";
 
-export default function Home({ setPage }) {
+export default function Home() {
+  const navigate = useNavigate();
+
+  function navto(location) {
+    navigate(location);
+  }
 
   return (
-    <ImageBackground source={homeBg} resizeMode='cover' style={styles.container}>
+    <ImageBackground
+      source={homeBg}
+      resizeMode='cover'
+      style={styles.container}
+    >
       {/* Logo */}
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo} />
@@ -14,18 +31,19 @@ export default function Home({ setPage }) {
 
       {/* Navigation */}
       <View style={styles.buttonContainer}>
-
         {/* Takes you to shop */}
-        <TouchableOpacity style={styles.guestButton} onPress={() => setPage('shop')}>
+        <TouchableOpacity
+          style={styles.guestButton}
+          onPress={() => navto("shop")}
+        >
           <Text style={styles.guest}>Login as Guest</Text>
         </TouchableOpacity>
 
         {/* Takes you to admin dashboard */}
-        <TouchableOpacity onPress={() => setPage('dashboard')}>
+        <TouchableOpacity onPress={() => navto("dashboard")}>
           <Text style={styles.admin}>Login as Admin</Text>
         </TouchableOpacity>
       </View>
-
     </ImageBackground>
   );
 }
@@ -33,40 +51,40 @@ export default function Home({ setPage }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     background: homeBg,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   logoContainer: {
-    marginBottom: '90%',
+    marginBottom: "90%",
     paddingHorizontal: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   logo: {
     width: 50,
     height: 50,
   },
   logoText: {
-    color: '#040404',
+    color: "#040404",
     fontSize: 35,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   buttonContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   guestButton: {
-    backgroundColor: '#119DA4',
+    backgroundColor: "#119DA4",
     paddingHorizontal: 50,
     paddingVertical: 12,
     borderRadius: 50,
-    marginBottom: '5%',
+    marginBottom: "5%",
   },
   guest: {
     fontSize: 18,
-    color: 'white'
+    color: "white",
   },
   admin: {
-    color: '#13505B',
-  }
+    color: "#13505B",
+  },
 });

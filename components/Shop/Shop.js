@@ -5,37 +5,36 @@ import Header from './Header';
 import Menu from './Menu';
 import NavBar from './NavBar';
 
-export default function Shop({ page, setPage }) {
-
+export default function Shop() {
   const [loading, setLoading] = useState(false);
 
   const [foods, setFoods] = useState([]);
 
-  const [drinks, setDrinks] = useState([])
+  const [drinks, setDrinks] = useState([]);
 
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState("all");
 
   async function fetchProducts(type) {
     try {
       setLoading(true);
-      const response = await axios.get('https://puce-beautiful-beaver.cyclic.app/restaurant/menu/' + type);
-      if (type == 'foods') {
+      const response = await axios.get(
+        "https://puce-beautiful-beaver.cyclic.app/restaurant/menu/" + type
+      );
+      if (type == "foods") {
         setFoods(response.data);
       }
-      if (type == 'drinks') {
+      if (type == "drinks") {
         setDrinks(response.data);
       }
-    }
-
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
     setLoading(false);
   }
 
   useEffect(() => {
-    fetchProducts('foods');
-    fetchProducts('drinks');
+    fetchProducts("foods");
+    fetchProducts("drinks");
   }, []);
 
 
@@ -46,17 +45,14 @@ export default function Shop({ page, setPage }) {
       <Header page={page} />
 
       <Menu
-        setPage={setPage}
         loading={loading}
         foods={foods}
         drinks={drinks}
         category={category}
-        setCategory={setCategory} />
+        setCategory={setCategory}
+      />
 
-      <NavBar
-        setPage={setPage}
-        category={category}
-        setCategory={setCategory} />
+      <NavBar category={category} setCategory={setCategory} />
 
     </View>
   );
@@ -65,8 +61,8 @@ export default function Shop({ page, setPage }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    width: "100%",
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
 });

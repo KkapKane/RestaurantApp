@@ -6,7 +6,7 @@ import BottomNav from "./BottonNav";
 import Revenue from "./Revenue";
 import RecentOrders from "./RecentOrders";
 
-export default function Dashboard({ setPage }) {
+export default function Dashboard() {
   return (
     <View style={styles.container}>
       <View>
@@ -16,7 +16,7 @@ export default function Dashboard({ setPage }) {
       <Overview />
       <Revenue />
       <RecentOrders />
-      <BottomNav setPage={setPage} />
+      <BottomNav />
     </View>
   );
 }
