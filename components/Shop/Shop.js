@@ -1,18 +1,23 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Keyboard } from 'react-native';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './Header';
 import Menu from './Menu';
 import NavBar from './NavBar';
+import Product from './Product';
 
 export default function Shop() {
   const [loading, setLoading] = useState(false);
 
+  const [category, setCategory] = useState('all');
+
+  const [page, setPage] = useState('main');
+
+  const [current, setCurrent] = useState([{}]);
+
   const [foods, setFoods] = useState([]);
 
   const [drinks, setDrinks] = useState([]);
-
-  const [category, setCategory] = useState("all");
 
   async function fetchProducts(type) {
     try {
@@ -37,22 +42,65 @@ export default function Shop() {
     fetchProducts("drinks");
   }, []);
 
+  /* determine if keyboard is open */
+  const [kb, setKb] = useState(false);
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", () => {
+      setKb(true);
+    })
+    Keyboard.addListener("keyboardDidHide", () => {
+      setKb(false);
+    })
+  }, [])
+
+  /* Cart */
+  const [item, setItem] = useState()
+  const [cart, setCart] = useState([]);
 
 
+  useEffect(() => {
+    if(!cart) return; 
+    console.log(cart)
+  }, [cart])
 
   return (
     <View style={styles.container}>
-      <Header page={page} />
-
-      <Menu
-        loading={loading}
-        foods={foods}
-        drinks={drinks}
-        category={category}
-        setCategory={setCategory}
+      <Header
+        page={page}
+        setPage={setPage}
       />
 
-      <NavBar category={category} setCategory={setCategory} />
+      {page == 'main' ?
+        <Menu
+          loading={loading}
+          foods={foods}
+          drinks={drinks}
+          category={category}
+          setCategory={setCategory}
+          setPage={setPage}
+          setCurrent={setCurrent}
+        />
+        : null}
+
+      {page == 'product' ?
+        <Product
+          current={current}
+          item={item}
+          setItem={setItem}
+          cart={cart}
+          setCart={setCart} />
+        : null}
+
+
+      {/* hide navbar when keyboard is out */}
+      {!kb ?
+        <NavBar
+          category={category}
+          setCategory={setCategory}
+          setPage={setPage}
+        />
+        : null}
 
     </View>
   );

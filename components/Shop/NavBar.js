@@ -3,14 +3,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigate } from "react-router-native";
 
-export default function NavBar({ category, setCategory }) {
+export default function NavBar({ category, setCategory, setPage }) {
+
   const navigate = useNavigate();
   function navto(location) {
     navigate(location);
-  }
+  }  
 
   return (
     <View style={styles.navBar}>
@@ -21,7 +21,7 @@ export default function NavBar({ category, setCategory }) {
 
       <TouchableOpacity
         style={styles.navBtn}
-        onPress={() => setCategory("all")}
+        onPress={() => {setCategory("all"); setPage('main')}}
       >
         <MaterialIcons
           name='menu-book'
@@ -35,7 +35,7 @@ export default function NavBar({ category, setCategory }) {
 
             <TouchableOpacity
                 style={styles.navBtn}
-                onPress={() => setCategory('food')} >
+                onPress={() => {setCategory('food'); setPage('main')}} >
                 <Entypo name='bowl' size={30}
                     color={category == 'food' || category == 'appetizers' || category == 'entrees' ? '#119DA4' : null} />
                 <Text style={category == 'food' || category == 'appetizers' || category == 'entrees' ? { color: '#119DA4' } : null}>
@@ -45,7 +45,7 @@ export default function NavBar({ category, setCategory }) {
 
             <TouchableOpacity
                 style={styles.navBtn}
-                onPress={() => setCategory('drinks')}>
+                onPress={() => {setCategory('drinks'); setPage('main')}}>
                 <MaterialCommunityIcons name='tea-outline' size={30} color={category == 'drinks' ? '#119DA4' : null} />
                 <Text style={category == 'drinks' ? { color: '#119DA4' } : null}>Drinks</Text>
             </TouchableOpacity>

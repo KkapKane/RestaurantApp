@@ -1,58 +1,21 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Stars from './Stars';
 
-export default function Menu({ i, setPage }) {
+export default function Card({ i, setPage, setCurrent }) {
+
+    const openProduct = () => {
+        setCurrent(i);
+        setPage('product');
+    }
 
     return (
-        <TouchableOpacity style={styles.card} onPress={() => setPage('menuProduct')}>
+        <TouchableOpacity style={styles.card} onPress={openProduct}>
             <Image
                 source={{ uri: `${i.img}` }}
                 style={styles.image} />
             <View style={styles.text}>
                 <Text style={styles.name}>{i.name}</Text>
-                <View style={styles.stars} >
-                    {i.rating >= 0 && i.rating <= 0.99 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star-half-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 1 && i.rating <= 1.49 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 1.5 && i.rating <= 1.99 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-half-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 2 && i.rating <= 2.49 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 2.5 && i.rating <= 2.99 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-half-o' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 3 && i.rating <= 3.49 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 3.5 && i.rating <= 3.99 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-half-o' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 4 && i.rating <= 4.49 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-o' />
-                        </View> : null}
-                    {i.rating >= 4.5 && i.rating <= 4.99 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star-half-o' />
-                        </View> : null}
-                    {i.rating == 5 ?
-                        <View style={styles.stars}>
-                            <FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' /><FontAwesome color='#ffe234' name='star' />
-                        </View> : null}
-                    <Text style={{ fontWeight: 'bold' }}>{i.rating}</Text>
-                </View>
+                <Stars i={i} />
                 <Text style={styles.price}>${i.price}</Text>
             </View>
         </TouchableOpacity>
@@ -80,11 +43,6 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 20,
 
-    },
-    stars: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 5,
     },
     price: {
         fontSize: 15,
