@@ -1,3 +1,4 @@
+
 import { StyleSheet, View, Keyboard } from 'react-native';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -41,6 +42,7 @@ export default function Shop() {
     fetchProducts("foods");
     fetchProducts("drinks");
   }, []);
+
 
   /* determine if keyboard is open */
   const [kb, setKb] = useState(false);
@@ -101,6 +103,7 @@ export default function Shop() {
           setPage={setPage}
         />
         : null}
+
 
     </View>
   );

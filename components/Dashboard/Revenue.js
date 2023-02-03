@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "15%",
     position: "absolute",
-    bottom: 240,
+    bottom: 220,
   },
   revCard: {
     height: 80,
