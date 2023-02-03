@@ -3,7 +3,7 @@ import Card from './Card';
 import appIcon from '../../assets/icons8-tapas-100.png';
 import entIcon from '../../assets/icons8-noodles-100.png';
 
-export default function Menu({ setPage, loading, foods, drinks, category, setCategory }) {
+export default function Menu({ loading, foods, drinks, category, setCategory, setPage, setCurrent }) {
 
     const display = () => {
         if (category == 'all') {
@@ -11,7 +11,12 @@ export default function Menu({ setPage, loading, foods, drinks, category, setCat
             return (
                 all.map(i => {
                     return (
-                        <Card i={i} key={i._id} setPage={setPage} />
+                        <Card
+                            i={i}
+                            key={i._id}
+                            setCurrent={setCurrent}
+                            setPage={setPage}
+                        />
                     );
                 })
             )
@@ -40,7 +45,12 @@ export default function Menu({ setPage, loading, foods, drinks, category, setCat
             return (
                 filterFood('appetizer').map(i => {
                     return (
-                        <Card i={i} key={i._id} setPage={setPage} />
+                        <Card
+                            i={i}
+                            key={i._id}
+                            setCurrent={setCurrent}
+                            setPage={setPage}
+                        />
                     );
                 })
             )
@@ -50,7 +60,12 @@ export default function Menu({ setPage, loading, foods, drinks, category, setCat
             return (
                 filterFood('entree').map(i => {
                     return (
-                        <Card i={i} key={i._id} setPage={setPage} />
+                        <Card
+                            i={i}
+                            key={i._id}
+                            setCurrent={setCurrent}
+                            setPage={setPage}
+                        />
                     );
                 })
             )
@@ -60,7 +75,12 @@ export default function Menu({ setPage, loading, foods, drinks, category, setCat
             return (
                 drinks.map(i => {
                     return (
-                        <Card i={i} key={i._id} setPage={setPage} />
+                        <Card
+                            i={i}
+                            key={i._id}
+                            setCurrent={setCurrent}
+                            setPage={setPage}
+                        />
                     );
                 })
             )
