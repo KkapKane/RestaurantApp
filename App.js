@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { NativeRouter, Routes, Route } from "react-router-native";
 
 export default function App() {
+
   return (
     <NativeRouter>
       <View style={styles.container}>
