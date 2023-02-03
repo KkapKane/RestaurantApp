@@ -1,9 +1,9 @@
-import { StyleSheet, View } from 'react-native';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Header from './Header';
-import Menu from './Menu';
-import NavBar from './NavBar';
+import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Header from "./Header";
+import Menu from "./Menu";
+import NavBar from "./NavBar";
 
 export default function Shop() {
   const [loading, setLoading] = useState(false);
@@ -37,12 +37,9 @@ export default function Shop() {
     fetchProducts("drinks");
   }, []);
 
-
-
-
   return (
     <View style={styles.container}>
-      <Header page={page} />
+      <Header />
 
       <Menu
         loading={loading}
@@ -53,7 +50,6 @@ export default function Shop() {
       />
 
       <NavBar category={category} setCategory={setCategory} />
-
     </View>
   );
 }

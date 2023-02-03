@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 export default function RecentOrders() {
   return (
     <View style={styles.recent}>
-      <Text style={{ fontSize: 20 }}>Recent Orders</Text>
+      <Text style={{ fontSize: 20, padding: 12 }}>Recent Orders</Text>
       <View style={styles.recentContainer}></View>
     </View>
   );
