@@ -91,7 +91,8 @@ export default function Shop() {
           item={item}
           setItem={setItem}
           cart={cart}
-          setCart={setCart} />
+          setCart={setCart}
+          kb={kb} />
         : null}
 
 
