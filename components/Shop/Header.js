@@ -17,6 +17,11 @@ export default function Header({ page, setPage }) {
                     </TouchableOpacity>
                 </View>
                 : null}
+            {page == 'cart' ?
+                <View style={styles.headerContainer}>
+                    <Text style={styles.header}>Cart</Text>
+                </View>
+                : null}
         </View>
     );
 }

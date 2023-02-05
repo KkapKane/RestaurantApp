@@ -96,8 +96,11 @@ export default function Menu({ loading, foods, drinks, category, setCategory, se
         <ScrollView style={styles.menuContainer}>
             {!loading ?
                 foods !== undefined ?
-                    /* insert menu maps */
-                    <View style={{ height: '100%' }}>{display()}</View>
+                    drinks !== undefined ?
+                        /* insert menu maps */
+                        <View style={{ height: '100%' }}>{display()}</View>
+                        :
+                        <ActivityIndicator size='large' />
                     :
                     <ActivityIndicator size='large' />
                 :
