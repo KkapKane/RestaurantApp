@@ -6,6 +6,7 @@ import Header from './Header';
 import Menu from './Menu';
 import NavBar from './NavBar';
 import Product from './Product';
+import Cart from './Cart';
 
 export default function Shop() {
   const [loading, setLoading] = useState(false);
@@ -62,7 +63,7 @@ export default function Shop() {
 
 
   useEffect(() => {
-    if(!cart) return; 
+    if (!cart) return;
     console.log(cart)
   }, [cart])
 
@@ -95,6 +96,13 @@ export default function Shop() {
           kb={kb} />
         : null}
 
+      {page == 'cart' ?
+        <Cart
+          cart={cart}
+          setCart={setCart}
+        />
+        : null}
+
 
       {/* hide navbar when keyboard is out */}
       {!kb ?
@@ -102,6 +110,7 @@ export default function Shop() {
           category={category}
           setCategory={setCategory}
           setPage={setPage}
+          cart={cart}
         />
         : null}
 
