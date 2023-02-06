@@ -103,6 +103,7 @@ export default function Shop() {
         <Cart
           cart={cart}
           setCart={setCart}
+          kb={kb}
         />
         : null}
 

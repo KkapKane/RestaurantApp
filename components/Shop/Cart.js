@@ -2,9 +2,10 @@ import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from "react-nati
 import CartItem from "./CartItem";
 import { useState, useEffect } from "react";
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import CartModal from "./CartModal";
+import CartEmptyModal from "./CartEmptyModal";
+import CartCheckoutModal from "./CartCheckoutModal";
 
-export default function Cart({ cart, setCart }) {
+export default function Cart({ cart, setCart, kb }) {
 
     const display = () => {
         return (
@@ -52,14 +53,26 @@ export default function Cart({ cart, setCart }) {
     let gTotal = total + tax;
 
     /* modal for empty cart confirmation */
-    const [modalShow, setModalShow] = useState(false);
+    const [modalEShow, setModalEShow] = useState(false);
+
+    /* modal for checkout confirmation */
+    const [modalCShow, setModalCShow] = useState(false);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, modalCShow && kb ? { marginBottom: 0 } : null]}>
 
-            <CartModal
-                modalShow={modalShow}
-                setModalShow={setModalShow}
+            <CartEmptyModal
+                modalEShow={modalEShow}
+                setModalEShow={setModalEShow}
+                setCart={setCart}
+            />
+
+            <CartCheckoutModal
+                modalCShow={modalCShow}
+                setModalCShow={setModalCShow}
+                cart={cart}
+                qty={qty}
+                total={total}
             />
 
             {/* cart display */}
@@ -67,7 +80,7 @@ export default function Cart({ cart, setCart }) {
                 {display()}
 
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.emptyBtn} onPress={() => setModalShow(true)}>
+                    <TouchableOpacity style={styles.emptyBtn} onPress={() => setModalEShow(true)}>
                         <Text style={{ fontWeight: '600' }}>Empty Cart</Text>
                     </TouchableOpacity>
                 </View>
@@ -82,7 +95,9 @@ export default function Cart({ cart, setCart }) {
                     <Text style={styles.totalsText}>Sales Tax (8.25%): ${tax}</Text>
                     <Text style={styles.totalsText}>Grand Total: ${gTotal}</Text>
                 </View>
-                <TouchableOpacity style={styles.checkout}>
+                <TouchableOpacity
+                    style={styles.checkout}
+                    onPress={() => setModalCShow(true)}>
                     <AntDesign name='creditcard' size={30} color='white' />
                     <Text style={styles.totalsText}>Checkout</Text>
                 </TouchableOpacity>

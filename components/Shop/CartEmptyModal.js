@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Modal, Pressable } from "react-native";
 
-export default function CartModal({ modalShow, setModalShow }) {
+export default function CartEmptyModal({ modalEShow, setModalEShow, setCart }) {
 
     return (
             <Modal
                 animationType="fade"
                 transparent={true}
-                visible={modalShow}
-                onRequestClose={() => setModalShow(!modalShow)}>
+                visible={modalEShow}
+                onRequestClose={() => setModalEShow(!modalEShow)}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
                         <Text style={[styles.modalHeader, styles.modalText]}>
@@ -18,14 +18,14 @@ export default function CartModal({ modalShow, setModalShow }) {
                         </Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                             <Pressable
-                                onPress={() => setModalShow(!modalShow)}
+                                onPress={() => setModalEShow(!modalEShow)}
                                 style={{ marginRight: 15 }}>
                                 <Text style={styles.modalBtnText}>Cancel</Text>
                             </Pressable>
                             <Pressable
                                 onPress={() => {
                                     setCart([]);
-                                    setModalShow(!modalShow);
+                                    setModalEShow(!modalEShow);
                                 }}>
                                 <Text style={styles.modalBtnText}>OK</Text>
                             </Pressable>
