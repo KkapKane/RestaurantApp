@@ -72,6 +72,7 @@ export default function Shop() {
       <Header
         page={page}
         setPage={setPage}
+        setCategory={setCategory}
       />
 
       {page == 'main' ?
@@ -93,7 +94,9 @@ export default function Shop() {
           setItem={setItem}
           cart={cart}
           setCart={setCart}
-          kb={kb} />
+          kb={kb} 
+          setPage={setPage}
+          />
         : null}
 
       {page == 'cart' ?

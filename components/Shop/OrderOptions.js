@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard } from "r
 import { useEffect, useState } from "react";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function OrderOptions({ current, item, setItem, cart, setCart }) {
+export default function OrderOptions({ current, item, setItem, cart, setCart, setPage }) {
 
     const [input, setInput] = useState();
     const [qInput, setQInput] = useState(1);
@@ -36,6 +36,8 @@ export default function OrderOptions({ current, item, setItem, cart, setCart }) 
             setQInput("1");
             return;
         }
+        const timeout = setTimeout(() => setPage('main'), 200);
+        return () => clearTimeout(timeout);
     }
 
     /* function to add/subtract quantity */
@@ -86,10 +88,6 @@ export default function OrderOptions({ current, item, setItem, cart, setCart }) 
 
                     <TouchableOpacity onPress={() => qtyBtn('+')} style={styles.qBtn}>
                         <Ionicons name="add" size={20} color="white" />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setCart()} style={styles.qBtn}>
-                        <Text>reset</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={addCart} style={[styles.qBtn, { flex: 1, alignItems: 'center' }]}>
