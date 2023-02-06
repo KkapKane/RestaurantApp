@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function Header({ page, setPage }) {
+export default function Header({ page, setPage, setCategory }) {
 
     return (
         <View style={{ width: '100%' }}>
@@ -19,6 +19,12 @@ export default function Header({ page, setPage }) {
                 : null}
             {page == 'cart' ?
                 <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => {
+                        setPage('main');
+                        setCategory('all');
+                        }}>
+                        <Ionicons name='arrow-back' size={25} />
+                    </TouchableOpacity>
                     <Text style={styles.header}>Cart</Text>
                 </View>
                 : null}

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import Stars from './Stars';
 import OrderOptions from "./OrderOptions";
 
-export default function Product({ current, item, setItem, cart, setCart, kb }) {
+export default function Product({ current, item, setItem, cart, setCart, kb, setPage }) {
 
     return (
         <View style={styles.container}>
@@ -43,7 +43,8 @@ export default function Product({ current, item, setItem, cart, setCart, kb }) {
                 item={item}
                 setItem={setItem}
                 cart={cart}
-                setCart={setCart} />
+                setCart={setCart}
+                setPage={setPage} />
 
         </View>
     )
