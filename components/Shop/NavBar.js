@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -6,7 +6,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import { useNavigate } from "react-router-native";
 import { useEffect, useState } from "react";
 
-export default function NavBar({ category, setCategory, setPage, cart }) {
+export default function NavBar({ category, setCategory, page, setPage, cart }) {
 
   const navigate = useNavigate();
   function navto(location) {
@@ -26,14 +26,48 @@ export default function NavBar({ category, setCategory, setPage, cart }) {
     }
   }, [cart])
 
+  const handleHomeBtn = () => {
+    if (page == 'cart') {
+      return Alert.alert('This will empty your cart', 'Go back to Home?', [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => navto("/"),
+        }
+      ],
+        {
+          cancelable: true,
+        });
+    }
+    else {
+      navto("/")
+    }
+  }
+
   return (
     <View style={styles.navBar}>
-      <TouchableOpacity style={styles.navBtn} onPress={() => navto("/")}>
+      <TouchableOpacity style={styles.navBtn} onPress={handleHomeBtn}>
         <Ionicons
           name='home-outline'
           size={30}
         />
         <Text>Home</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.navBtn}
+        onPress={() => { setCategory('orderConfirm'); setPage('orderConfirm') }}
+      >
+        <MaterialCommunityIcons
+          name='history'
+          size={30}
+          color={page == "orderConfirm" ? "#119DA4" : null}
+        />
+        <Text style={page == "orderConfirm" ? { color: "#119DA4" } : null}>
+          History
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -78,7 +112,7 @@ export default function NavBar({ category, setCategory, setPage, cart }) {
 
       <TouchableOpacity
         style={styles.navBtn}
-        onPress={() => { setCategory('cart'); setPage('cart')}}>
+        onPress={() => { setCategory('cart'); setPage('cart') }}>
         <MaterialCommunityIcons
           name='food-takeout-box-outline'
           size={30}
@@ -86,9 +120,7 @@ export default function NavBar({ category, setCategory, setPage, cart }) {
         />
         <View style={{ flexDirection: 'row' }}>
           <Text style={category == 'cart' ? { color: '#119DA4' } : null}>
-            Cart </Text>
-          <Text style={qt > 0 ? { color: '#119DA4', fontWeight: 'bold' } : null}>
-            ({qt})
+            Cart ({qt})
           </Text>
         </View>
       </TouchableOpacity>

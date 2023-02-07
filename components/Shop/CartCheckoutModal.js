@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Modal, Pressable, TextInput, Alert } from "react-native";
 import axios from "axios";
 
-export default function CartCheckoutModal({ modalCShow, setModalCShow, cart, qty, total }) {
+export default function CartCheckoutModal({ modalCShow, setModalCShow, cart, setCart, qty, total, setPage, setOrderCheck, setCategory }) {
 
     const [order, setOrder] = useState([]);
 
@@ -22,13 +22,19 @@ export default function CartCheckoutModal({ modalCShow, setModalCShow, cart, qty
     }, [cart])
 
     const postOrder = () => {
-        axios.post('https://puce-beautiful-beaver.cyclic.app/restaurant/transactions', {
+        axios
+            .post('https://puce-beautiful-beaver.cyclic.app/restaurant/transactions', {
                 customerName: input,
                 totalQty: qty,
                 totalPrice: total,
                 order: order
             },
-        );
+            )
+            .then((response) => setOrderCheck(response.data))
+            .catch((err) => console.error(err));
+        setCart([]);
+        setPage('orderConfirm');
+        setCategory('orderConfirm');
     }
 
     const handleBtn = () => {
@@ -36,7 +42,10 @@ export default function CartCheckoutModal({ modalCShow, setModalCShow, cart, qty
             setModalCShow(!modalCShow);
             return Alert.alert('Name Required', 'Please enter your name!', [{
                 text: 'OK'
-            }])
+            }],
+                {
+                    cancelable: true,
+                })
         }
         else {
             postOrder();
@@ -57,8 +66,6 @@ export default function CartCheckoutModal({ modalCShow, setModalCShow, cart, qty
                     </Text>
 
                     <TextInput
-                        autoCapitalize="words"
-                        autoComplete="name"
                         style={[styles.input, styles.modalText]}
                         placeholder="Name"
                         onChangeText={text => setInput(text)}
