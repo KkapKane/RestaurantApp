@@ -22,10 +22,19 @@ export default function Header({ page, setPage, setCategory }) {
                     <TouchableOpacity onPress={() => {
                         setPage('main');
                         setCategory('all');
-                        }}>
+                    }}>
                         <Ionicons name='arrow-back' size={25} />
                     </TouchableOpacity>
                     <Text style={styles.header}>Cart</Text>
+                </View>
+                : null}
+
+            {page == 'orderConfirm' ?
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => setPage('main')}>
+                        <Ionicons name='arrow-back' size={25} />
+                    </TouchableOpacity>
+                    <Text style={styles.header}>Order Successful</Text>
                 </View>
                 : null}
         </View>
@@ -39,7 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingHorizontal: 20,
-        paddingTop: 30,
+        paddingTop: '12%',
     },
     header: {
         fontSize: 25,

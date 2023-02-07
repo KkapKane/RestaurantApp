@@ -1,11 +1,10 @@
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Alert } from "react-native";
 import CartItem from "./CartItem";
 import { useState, useEffect } from "react";
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import CartEmptyModal from "./CartEmptyModal";
 import CartCheckoutModal from "./CartCheckoutModal";
 
-export default function Cart({ cart, setCart, kb }) {
+export default function Cart({ cart, setCart, kb, setPage, setOrderCheck, setCategory }) {
 
     const display = () => {
         return (
@@ -52,27 +51,39 @@ export default function Cart({ cart, setCart, kb }) {
     let tax = Math.round((total * 0.0825) * 100) / 100;
     let gTotal = total + tax;
 
-    /* modal for empty cart confirmation */
-    const [modalEShow, setModalEShow] = useState(false);
-
     /* modal for checkout confirmation */
     const [modalCShow, setModalCShow] = useState(false);
 
+    const handleEmptyBtn = () => {
+        return Alert.alert('Empty Cart', 'Are you sure you want to remove all items from your cart?', [
+          {
+            text: 'Cancel',
+            styles: {color: '#13505B'}
+          },
+          {
+            text: 'OK',
+            onPress: () => setCart([]),
+            styles: {color: '#13505B'}
+          }
+        ],
+        {
+            cancelable: true,
+        });
+      }
+
     return (
         <View style={[styles.container, modalCShow && kb ? { marginBottom: 0 } : null]}>
-
-            <CartEmptyModal
-                modalEShow={modalEShow}
-                setModalEShow={setModalEShow}
-                setCart={setCart}
-            />
 
             <CartCheckoutModal
                 modalCShow={modalCShow}
                 setModalCShow={setModalCShow}
                 cart={cart}
+                setCart={setCart}
                 qty={qty}
                 total={total}
+                setPage={setPage}
+                setOrderCheck={setOrderCheck}
+                setCategory={setCategory}
             />
 
             {/* cart display */}
@@ -80,7 +91,7 @@ export default function Cart({ cart, setCart, kb }) {
                 {display()}
 
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.emptyBtn} onPress={() => setModalEShow(true)}>
+                    <TouchableOpacity style={styles.emptyBtn} onPress={handleEmptyBtn}>
                         <Text style={{ fontWeight: '600' }}>Empty Cart</Text>
                     </TouchableOpacity>
                 </View>

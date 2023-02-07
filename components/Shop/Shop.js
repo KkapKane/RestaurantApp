@@ -7,6 +7,7 @@ import Menu from './Menu';
 import NavBar from './NavBar';
 import Product from './Product';
 import Cart from './Cart';
+import OrderConfirm from './OrderConfirm';
 
 export default function Shop() {
   const [loading, setLoading] = useState(false);
@@ -61,11 +62,8 @@ export default function Shop() {
   const [item, setItem] = useState()
   const [cart, setCart] = useState([]);
 
-
-  useEffect(() => {
-    if (!cart) return;
-    console.log(cart)
-  }, [cart])
+  /* retrieve order that was just checked out */
+  const [orderCheck, setOrderCheck] = useState([]);
 
   return (
     <View style={styles.container}>
@@ -94,9 +92,9 @@ export default function Shop() {
           setItem={setItem}
           cart={cart}
           setCart={setCart}
-          kb={kb} 
+          kb={kb}
           setPage={setPage}
-          />
+        />
         : null}
 
       {page == 'cart' ?
@@ -104,6 +102,15 @@ export default function Shop() {
           cart={cart}
           setCart={setCart}
           kb={kb}
+          setPage={setPage}
+          setCategory={setCategory}
+          setOrderCheck={setOrderCheck}
+        />
+        : null}
+
+      {page == 'orderConfirm' ?
+        <OrderConfirm
+          orderCheck={orderCheck}
         />
         : null}
 
@@ -113,6 +120,7 @@ export default function Shop() {
         <NavBar
           category={category}
           setCategory={setCategory}
+          page={page}
           setPage={setPage}
           cart={cart}
         />
