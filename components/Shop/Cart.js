@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     totals: {
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#13505B',
+        backgroundColor: '#119DA4',
         paddingVertical: 5,
     },
     totalsHeader: {

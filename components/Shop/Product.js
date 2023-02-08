@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 16,
-        color: '#13505B',
+        color: '#119DA4',
     },
 });
