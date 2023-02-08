@@ -1,10 +1,18 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Transaction from "./Transaction";
 
-export default function RecentOrders() {
+export default function RecentOrders({ loading, transactions }) {
+  const reversedTrans = transactions.reverse();
   return (
     <View style={styles.recent}>
       <Text style={{ fontSize: 20, padding: 12 }}>Recent Orders</Text>
-      <View style={styles.recentContainer}></View>
+      <ScrollView style={styles.recentContainer}>
+        {reversedTrans.map((transaction) => {
+          return <Transaction transaction={transaction} />;
+        })}
+      </ScrollView>
     </View>
   );
 }

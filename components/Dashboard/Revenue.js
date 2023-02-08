@@ -1,6 +1,14 @@
 import { View, ScrollView, StyleSheet, Text } from "react-native";
+import { useEffect } from "react";
 
-export default function Revenue() {
+export default function Revenue({ transactions }) {
+  const totalRev = transactions.reduce((p, c) => {
+    return p + c.totalPrice;
+  }, 0);
+
+  useEffect(() => {
+    console.log(totalRev);
+  }, []);
   return (
     <ScrollView
       horizontal={true}
@@ -10,17 +18,21 @@ export default function Revenue() {
       <View style={styles.revCard}>
         <Text>TOTAL </Text>
         <Text>REVENUE</Text>
-        <Text style={{ color: "green", fontSize: 20 }}>$32,987</Text>
+        <Text style={{ color: "green", fontSize: 20 }}>${totalRev}</Text>
       </View>
       <View style={styles.revCard}>
         <Text>TOTAL </Text>
         <Text>PROFIT</Text>
-        <Text style={{ color: "green", fontSize: 20 }}>$27,887</Text>
+        <Text style={{ color: "green", fontSize: 20 }}>
+          ${totalRev - totalRev * 0.2}
+        </Text>
       </View>
       <View style={styles.revCard}>
         <Text>TOTAL </Text>
         <Text>ORDERS</Text>
-        <Text style={{ color: "blue", fontSize: 20 }}>1,987</Text>
+        <Text style={{ color: "blue", fontSize: 20 }}>
+          {transactions.length}
+        </Text>
       </View>
       <View style={styles.revCard}>
         <Text>TOTAL </Text>

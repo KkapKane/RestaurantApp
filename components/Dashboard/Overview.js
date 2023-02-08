@@ -3,8 +3,9 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { LineChart } from "react-native-chart-kit";
 import { useState, useEffect } from "react";
 
-export default function Overview() {
+export default function Overview({ transactions }) {
   const [time, setTime] = useState(new Date());
+  const [dataArray, setDataArray] = useState();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -87,7 +88,7 @@ export default function Overview() {
               ],
               datasets: [
                 {
-                  data: [4, 5, 6, 4, 5, 6, 3],
+                  data: [1, 2, 3, 4, 5, 6],
                 },
               ],
             }}
