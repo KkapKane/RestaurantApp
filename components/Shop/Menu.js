@@ -26,7 +26,7 @@ export default function Menu({ loading, foods, drinks, category, setCategory, se
             return (
                 <View style={{ height: '100%' }}>
                     <TouchableOpacity
-                        style={[styles.category, { borderTopColor: '#d1d1d1', borderTopWidth: 1, marginTop: '10%' }]}
+                        style={[styles.category, { borderTopColor: '#d1d1d1', borderTopWidth: 1, marginTop: '5%' }]}
                         onPress={() => setCategory('appetizers')}>
                         <Image source={appIcon} />
                         <Text style={styles.categoryText}>Appetizers</Text>
@@ -115,16 +115,17 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 60,
         marginTop: 10,
+        backgroundColor: '#d1d1d1',
     },
     category: {
         height: 200,
-        marginBottom: 20,
+        margin: 10,
         paddingHorizontal: 40,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderBottomColor: '#d1d1d1',
-        borderBottomWidth: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+        borderRadius: 10,
     },
     categoryText: {
         fontSize: 24,

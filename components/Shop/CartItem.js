@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     qBtn: {
-        backgroundColor: '#13505B',
+        backgroundColor: '#119DA4',
         padding: 3,
         marginRight: 2,
     }

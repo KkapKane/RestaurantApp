@@ -52,22 +52,9 @@ export default function NavBar({ category, setCategory, page, setPage, cart }) {
         <Ionicons
           name='home-outline'
           size={30}
+          color={'rgba(255, 255, 255, 0.8)'}
         />
-        <Text>Home</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.navBtn}
-        onPress={() => { setCategory('orderConfirm'); setPage('orderConfirm') }}
-      >
-        <MaterialCommunityIcons
-          name='history'
-          size={30}
-          color={page == "orderConfirm" ? "#119DA4" : null}
-        />
-        <Text style={page == "orderConfirm" ? { color: "#119DA4" } : null}>
-          History
-        </Text>
+        <Text style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Home</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -77,9 +64,9 @@ export default function NavBar({ category, setCategory, page, setPage, cart }) {
         <MaterialIcons
           name='menu-book'
           size={30}
-          color={category == "all" ? "#119DA4" : null}
+          color={category == "all" ? 'white' : 'rgba(255, 255, 255, 0.8)'}
         />
-        <Text style={category == "all" ? { color: "#119DA4" } : null}>
+        <Text style={category == "all" ? { color: 'white' } : { color: 'rgba(255, 255, 255, 0.8)' }}>
           Browse All
         </Text>
       </TouchableOpacity>
@@ -90,9 +77,9 @@ export default function NavBar({ category, setCategory, page, setPage, cart }) {
         <Entypo
           name='bowl'
           size={30}
-          color={category == 'food' || category == 'appetizers' || category == 'entrees' ? '#119DA4' : null}
+          color={category == 'food' || category == 'appetizers' || category == 'entrees' ? 'white' : 'rgba(255, 255, 255, 0.8)'}
         />
-        <Text style={category == 'food' || category == 'appetizers' || category == 'entrees' ? { color: '#119DA4' } : null}>
+        <Text style={category == 'food' || category == 'appetizers' || category == 'entrees' ? { color: 'white' } : { color: 'rgba(255, 255, 255, 0.8)' }}>
           Food
         </Text>
       </TouchableOpacity>
@@ -103,9 +90,9 @@ export default function NavBar({ category, setCategory, page, setPage, cart }) {
         <MaterialCommunityIcons
           name='tea-outline'
           size={30}
-          color={category == 'drinks' ? '#119DA4' : null}
+          color={category == 'drinks' ? 'white' : 'rgba(255, 255, 255, 0.8)'}
         />
-        <Text style={category == 'drinks' ? { color: '#119DA4' } : null}>
+        <Text style={category == 'drinks' ? { color: 'white' } : { color: 'rgba(255, 255, 255, 0.8)' }}>
           Drinks
         </Text>
       </TouchableOpacity>
@@ -116,10 +103,10 @@ export default function NavBar({ category, setCategory, page, setPage, cart }) {
         <MaterialCommunityIcons
           name='food-takeout-box-outline'
           size={30}
-          color={category == 'cart' ? '#119DA4' : null}
+          color={category == 'cart' ? 'white' : 'rgba(255, 255, 255, 0.8)'}
         />
         <View style={{ flexDirection: 'row' }}>
-          <Text style={category == 'cart' ? { color: '#119DA4' } : null}>
+          <Text style={category == 'cart' ? { color: 'white' } : { color: 'rgba(255, 255, 255, 0.8)' }}>
             Cart ({qt})
           </Text>
         </View>
@@ -136,11 +123,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     paddingHorizontal: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#13505B",
   },
   navBtn: {
     flexGrow: 1,
     alignItems: "center",
     justifyContent: "center",
   },
+  text: {
+    color: 'white',
+  }
 });

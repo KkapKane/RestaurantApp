@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
+        marginBottom: 10
     },
     orderOptions: {
         height: '100%',
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     qBtn: {
-        backgroundColor: '#13505B',
+        backgroundColor: '#119DA4',
         padding: 6,
         marginRight: 5,
     }
