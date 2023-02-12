@@ -2,61 +2,17 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { LineChart } from "react-native-chart-kit";
 import { useState, useEffect } from "react";
+import moment from "moment/moment";
 
 export default function Overview({ transactions }) {
-  const [time, setTime] = useState(new Date());
-  const [dataArray, setDataArray] = useState();
+  const [times, setTimes] = useState();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-  let roundTime = (hours, minutes, minutesToRound) => {
-    // Convert hours and minutes to minutes
-    let time = hours * 60 + minutes;
-    let rounded = Math.round(time / minutesToRound) * minutesToRound;
-
-    let roundedHours = Math.floor(rounded / 60);
-    let roundedMinutes = rounded % 60;
-
-    return { hours: roundedHours, minutes: roundedMinutes };
-  };
-
-  const timeArray = [
-    {
-      title: "5hr ago",
-      time: roundTime(time.getHours(), time.getMinutes(), 30),
-      suffix: time.getHours() - 5 < 12 ? "am" : "pm",
-    },
-    {
-      title: "4hr ago",
-      time: roundTime((time.getHours() - 4) % 12, time.getMinutes(), 30),
-      suffix: time.getHours() - 5 > 12 ? "am" : "pm",
-    },
-    {
-      title: "3hr ago",
-      time: roundTime((time.getHours() - 3) % 12, time.getMinutes(), 30),
-      suffix: time.getHours() - 5 < 12 ? "am" : "pm",
-    },
-    {
-      title: "2hr ago",
-      time: roundTime((time.getHours() - 2) % 12, time.getMinutes(), 30),
-      suffix: time.getHours() - 5 < 12 ? "am" : "pm",
-    },
-    {
-      title: "1hr ago",
-      time: roundTime((time.getHours() - 1) % 12, time.getMinutes(), 30),
-      suffix: time.getHours() - 5 < 12 ? "am" : "pm",
-    },
-    {
-      title: "now",
-      time: roundTime(time.getHours() % 12, time.getMinutes(), 15),
-      suffix: time.getHours() - 5 < 12 ? "am" : "pm",
-    },
-  ];
+  let rightnow = new Date();
+  let oneAgo = moment(rightnow).subtract(1, "hour").format("hh:mm");
+  let twoAgo = moment(rightnow).subtract(2, "hour").format("hh:mm");
+  let threeAgo = moment(rightnow).subtract(3, "hour").format("hh:mm");
+  let fourAgo = moment(rightnow).subtract(4, "hour").format("hh:mm");
+  let fiveAgo = moment(rightnow).subtract(5, "hour").format("hh:mm");
 
   return (
     <View style={styles.overview}>
@@ -79,12 +35,12 @@ export default function Overview({ transactions }) {
           <LineChart
             data={{
               labels: [
-                `${timeArray[0].time.hours}:${timeArray[0].time.minutes} ${timeArray[0].suffix} `,
-                `${timeArray[1].time.hours}:${timeArray[1].time.minutes} ${timeArray[1].suffix} `,
-                `${timeArray[2].time.hours}:${timeArray[2].time.minutes} ${timeArray[2].suffix} `,
-                `${timeArray[3].time.hours}:${timeArray[3].time.minutes} ${timeArray[3].suffix} `,
-                `${timeArray[4].time.hours}:${timeArray[4].time.minutes} ${timeArray[4].suffix} `,
-                `${timeArray[5].time.hours}:${timeArray[5].time.minutes} ${timeArray[5].suffix} `,
+                fiveAgo,
+                fourAgo,
+                threeAgo,
+                twoAgo,
+                oneAgo,
+                moment(rightnow).format("hh:mm"),
               ],
               datasets: [
                 {
