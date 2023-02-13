@@ -6,6 +6,17 @@ import moment from "moment/moment";
 
 export default function Overview({ transactions }) {
   const [times, setTimes] = useState();
+  const [data, setData] = useState();
+  useEffect(() => {
+    let priceOnly = transactions.map((item) => {
+      if (item.orderDate) return item.orderDate;
+    });
+    setData(priceOnly);
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   let rightnow = new Date();
   let oneAgo = moment(rightnow).subtract(1, "hour").format("hh:mm");
@@ -44,7 +55,7 @@ export default function Overview({ transactions }) {
               ],
               datasets: [
                 {
-                  data: [1, 2, 3, 4, 5, 6],
+                  data: [1, 2, 3, 4],
                 },
               ],
             }}
