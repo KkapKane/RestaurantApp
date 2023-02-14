@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 
 import DashboardNav from "./DashboardNav";
@@ -7,11 +7,19 @@ import BottomNav from "./BottonNav";
 import Revenue from "./Revenue";
 import RecentOrders from "./RecentOrders";
 import axios from "axios";
+import TransactionPage from "./TransactionsPage";
+import TransactionDetails from "./TransactionDetails";
 
 
 export default function Dashboard() {
   const [transactions, setTransactions] = useState();
   const [loading, setLoading] = useState(false);
+
+  /* navigate between pages in dashboard */
+  const [page, setPage] = useState('main');
+
+  /* grab current transaction for order details */
+  const [currentTransaction, setCurrentTransaction] = useState([]);
 
   async function grabTransactions() {
     try {
@@ -36,20 +44,35 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text></Text>
-      </View>
-      <DashboardNav />
+      <DashboardNav setPage={setPage} />
+
+      {loading == true ?
+        <View style={{ height: '100%', justifyContent: 'center' }}>
+          <ActivityIndicator size='large' />
+        </View>
+        : null}
+
       {loading == false && transactions ? (
         <Overview transactions={transactions} />
       ) : null}
-      {loading == false && transactions ? (
+      {page == 'main' && loading == false && transactions ? (
         <Revenue transactions={transactions} />
       ) : null}
 
-      {loading == false && transactions ? (
+      {page == 'main' && loading == false && transactions ? (
         <RecentOrders loading={loading} transactions={transactions} />
       ) : null}
+
+      {page == 'transactions' ?
+        <TransactionPage
+          transactions={transactions}
+          setPage={setPage}
+          setCurrentTransaction={setCurrentTransaction} />
+        : null}
+
+      {page == 'transactionDetails' ?
+        <TransactionDetails currentTransaction={currentTransaction} />
+        : null}
 
       <BottomNav />
     </View>
