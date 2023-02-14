@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 
-export default function DashboardNav() {
+export default function DashboardNav({ setPage }) {
   return (
     <ScrollView
       style={styles.nav}
@@ -31,7 +31,7 @@ export default function DashboardNav() {
         <Text>Customers</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => setPage('transactions')}>
         <View style={styles.ImgContainer}>
           <Fontisto name='shopping-pos-machine' size={30} />
         </View>
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 35,
     padding: 5,
-
     borderColor: "lightgray",
     borderStyle: "solid",
     borderWidth: 1,
