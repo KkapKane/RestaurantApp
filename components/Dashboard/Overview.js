@@ -7,11 +7,19 @@ import moment from "moment/moment";
 export default function Overview({ transactions }) {
   const [times, setTimes] = useState();
   const [data, setData] = useState();
+
   useEffect(() => {
-    let priceOnly = transactions.map((item) => {
-      if (item.orderDate) return item.orderDate;
+    let todaydate = moment(rightnow).format("MMM Do YY");
+    let lastweek = moment(rightnow).subtract(1, "week").format("MMM Do YY");
+
+    let today = transactions.filter(
+      (transaction) =>
+        moment(transaction.orderDate).format("MMM Do YY") === todaydate
+    );
+    let todaysTransaction = today.map((t) => {
+      return t.totalPrice;
     });
-    setData(priceOnly);
+    setData(todaysTransaction);
   }, []);
 
   useEffect(() => {
@@ -55,7 +63,7 @@ export default function Overview({ transactions }) {
               ],
               datasets: [
                 {
-                  data: [1, 2, 3, 4],
+                  data: [1, 2, 3, 4, 5, 6, 7, 8],
                 },
               ],
             }}
